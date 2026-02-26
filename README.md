@@ -18,7 +18,7 @@
 ## Formação
 
 ### PUCSC - Pontifícia Universidade Católica de Santa Catarina
-**Bacharelado em Engenharia de Software** (2024 - 2027) - *4º semestre em andamento*
+**Bacharelado em Engenharia de Software** (2024 - 2027) - *5º semestre em andamento*
 
 ## Certificações
 
