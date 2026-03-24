@@ -1,12 +1,13 @@
 # Igor Thiago Seberino
 
 ## Habilidades Técnicas
-- **Frameworks e Bibliotecas**: .NET, Django, Express
+- **Linguagens**: Python, C#, JavaScript
+- **Frameworks e Bibliotecas**: Django, .NET, React, Tailwind CSS, Express, Node.js
 - **Banco de Dados**: MySQL
 - **Controle de Versão**: Git, GitHub
 
 ## Sobre Mim
- Estudante do 5º semestre de Engenharia de Software pela PUCSC, com foco em desenvolvimento back-end. Possuo conhecimento em Python, JavaScript e C#, além de experiência com frameworks como Django e .NET. Familiaridade com metodologias de desenvolvimento de software e boas práticas de versionamento com Git. Busco oportunidade para aplicar e aprimorar minhas habilidades em projetos reais, contribuindo para o desenvolvimento de soluções eficientes e escaláveis.
+Estudante do 5º semestre de Engenharia de Software pela PUCSC, com foco em desenvolvimento fullstack. Possuo conhecimento em Python, JavaScript e C#, além de experiência com frameworks e bibliotecas como Django, .NET, React e Tailwind CSS. Tenho aplicado essa stack no desenvolvimento de sistemas completos, como o Event Manager. Familiaridade com metodologias de desenvolvimento e versionamento com Git. Busco oportunidade para aprimorar minhas habilidades em projetos reais, construindo soluções eficientes e escaláveis.
 
 ## Contato
 - 📍 Joinville - SC
@@ -28,7 +29,7 @@
 - [Git e GitHub: compartilhando e colaborando em projetos](https://cursos.alura.com.br/certificate/9c804b9f-5428-4b5c-a2e7-c7ba9dfb6ed3) 📜
 
 ## Interesses
-- Desenvolvimento back-end
+- Desenvolvimento Fullstack
 - Arquitetura de Software
 - APIs e Web Services
 - Aprendizado contínuo
