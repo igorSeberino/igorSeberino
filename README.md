@@ -1,7 +1,7 @@
 # Igor Thiago Seberino
 
 ## Habilidades Técnicas
-- **Linguagens**: Python, C#, JavaScript
+- **Linguagens**: Python, C#, JavaScript, Progress
 - **Frameworks e Bibliotecas**: Django, .NET, React, Tailwind CSS, Express, Node.js
 - **Banco de Dados**: MySQL
 - **Controle de Versão**: Git, GitHub
