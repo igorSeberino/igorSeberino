@@ -7,7 +7,7 @@
 - **Controle de Versão**: Git, GitHub
 
 ## Sobre Mim
-Estudante do 5º semestre de Engenharia de Software pela PUCSC, com foco em desenvolvimento fullstack. Possuo conhecimento em Python, JavaScript e C#, além de experiência com frameworks e bibliotecas como Django, .NET, React e Tailwind CSS. Tenho aplicado essa stack no desenvolvimento de sistemas completos, como o Event Manager. Familiaridade com metodologias de desenvolvimento e versionamento com Git. Busco oportunidade para aprimorar minhas habilidades em projetos reais, construindo soluções eficientes e escaláveis.
+Estudante do 6º semestre de Engenharia de Software pela PUCSC, com foco em desenvolvimento fullstack. Possuo conhecimento em Python, JavaScript e C#, além de experiência com frameworks e bibliotecas como Django, .NET, React e Tailwind CSS. Tenho aplicado essa stack no desenvolvimento de sistemas completos, como o Event Manager. Familiaridade com metodologias de desenvolvimento e versionamento com Git. Busco oportunidade para aprimorar minhas habilidades em projetos reais, construindo soluções eficientes e escaláveis.
 
 ## Contato
 - 📍 Joinville - SC
