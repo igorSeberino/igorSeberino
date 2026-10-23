@@ -9,8 +9,8 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parent.parent / "assets"
 out = Path(sys.argv[1])
 W = 1200
-rows = [["banner.svg"], ["divider.svg"], ["titan-file.svg"], ["utility-belt.svg"], ["mission-srec.svg", "mission-ludens.svg"],
-        ["footer.svg"]]
+rows = [["h-quem.svg"], ["about.svg"], ["h-ficha.svg"], ["titan-file.svg"], ["utility-belt.svg"], ["gear.svg"],
+        ["h-comunicador.svg"], ["communicator.svg"], ["footer.svg"], ["../dist/visits.svg"]]
 
 
 def render(name, width):
@@ -21,7 +21,7 @@ def render(name, width):
 def sheet(bg):
     imgs = []
     for row in rows:
-        w = W if len(row) == 1 else (W - 20) // 2
+        w = (600 if 'visits' in row[0] else W) if len(row) == 1 else (W - 20) // 2
         imgs.append([render(n, w) for n in row])
     h = sum(max(i.height for i in r) + 24 for r in imgs) + 24
     canvas = Image.new("RGBA", (W + 48, h), bg)

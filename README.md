@@ -15,49 +15,40 @@
 
 <img src="assets/divider.svg" width="100%" alt="">
 
-## 🐦 Quem é esse aí?
+<img src="assets/h-quem.svg" width="100%" alt="Quem é esse aí?">
 
-E aí! Sou o **Igor**. No crachá, **Consultor de Implantação na TOTVS SC**; no dia a dia, quem escreve as **customizações do Protheus** em **AdvPL** e **TLPP**: aquela regra de negócio que o padrão não cobre e o cliente precisa pra ontem.
+<p align="center">
+  <img src="assets/about.svg" width="100%" alt="E aí! Sou o Igor. No crachá, Consultor de Implantação na TOTVS SC; no dia a dia, quem escreve as customizações do Protheus em AdvPL e TLPP: aquela regra de negócio que o padrão não cobre e o cliente precisa pra ontem. No trampo: customizo o TOTVS Protheus, de ponto de entrada a rotina nova. Na faculdade: Engenharia de Software na Católica SC, com formatura prevista para 2027. Fora do ERP: faço web com Python, JavaScript e C# nos projetos da faculdade.">
+</p>
 
-- 🏢 Customizo o **TOTVS Protheus**: de ponto de entrada a rotina nova.
-- 🎓 Ainda na faculdade: **Engenharia de Software na Católica SC**, com formatura prevista para 2027.
-- 🧪 Fora do ERP, faço web com Python, JavaScript e C# nos projetos da faculdade.
-
-## 🗂️ Ficha do Titã
+<img src="assets/h-ficha.svg" width="100%" alt="Ficha do Titã">
 
 <p align="center">
   <img src="assets/titan-file.svg" width="100%" alt="Ficha do Titã — Identidade: Igor Thiago Seberino · Base: Joinville, SC · Equipe: TOTVS SC · Função: Consultor de Implantação · Especialidade: AdvPL e TLPP · Treinamento: Engenharia de Software na Católica SC (até 2027) · Idiomas: português (nativo) e inglês (intermediário) · Antecedentes: ex-jogador de LoL, em recuperação">
 </p>
 
-## 🧰 Cinto de utilidades
+<img src="assets/h-cinto.svg" width="100%" alt="Cinto de utilidades">
 
 <p align="center">
   <img src="assets/utility-belt.svg" width="100%" alt="Arma principal: AdvPL, TLPP, Protheus e SQL Server">
+  <img src="assets/gear.svg" width="100%" alt="Também no cinto: Python, C#, JavaScript, React, Node.js, Express, Django, FastAPI, .NET, Tailwind, PostgreSQL, MySQL, Flutter, Godot, Git, GitHub e um pé no Progress / OpenEdge ABL">
 </p>
 
-<p align="center"><b>Também no cinto</b></p>
-
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=py,cs,js,react,nodejs,express,django,fastapi,dotnet,tailwind,postgres,mysql,flutter,godot,git,github&perline=8&theme=dark" alt="Python, C#, JavaScript, React, Node.js, Express, Django, FastAPI, .NET, Tailwind, PostgreSQL, MySQL, Flutter, Godot, Git e GitHub">
-</p>
-
-<p align="center"><sub>…e um pé no <b>Progress / OpenEdge ABL</b>, do curso extracurricular da TOTVS.</sub></p>
-
-## 🎯 Missões
+<img src="assets/h-missoes.svg" width="100%" alt="Missões">
 
 <p align="center">
   <a href="https://github.com/igorSeberino/srec"><img src="assets/mission-srec.svg" width="49%" alt="Missão #01 — SREC: reservas de estações de trabalho e salas de reunião para coworking"></a>
   <a href="https://github.com/gcarvalhow/api.ludens"><img src="assets/mission-ludens.svg" width="49%" alt="Missão #02 — Ludens API: backend de venda de ingressos de um teatro comunitário"></a>
 </p>
 
-## 📊 Relatório da Torre
+<img src="assets/h-relatorio.svg" width="100%" alt="Relatório da Torre">
 
 <p align="center">
   <img src="https://github-readme-stats.vercel.app/api?username=igorSeberino&show_icons=true&include_all_commits=true&count_private=true&locale=pt-br&bg_color=121218&title_color=FFC93C&icon_color=2E9D4A&text_color=C9CBD3&border_color=E0262B&border_radius=14&custom_title=Relat%C3%B3rio%20da%20Torre" height="155" alt="Estatísticas do GitHub do Igor">
   <img src="https://streak-stats.demolab.com?user=igorSeberino&locale=pt_BR&background=121218&border=E0262B&stroke=2A2A35&ring=E0262B&fire=FFC93C&currStreakNum=F5F5F0&sideNums=F5F5F0&currStreakLabel=FFC93C&sideLabels=2E9D4A&dates=8B8E99&border_radius=14" height="155" alt="Sequência de contribuições do Igor">
 </p>
 
-## 🐍 Patrulha noturna
+<img src="assets/h-patrulha.svg" width="100%" alt="Patrulha noturna">
 
 <p align="center">
   <picture>
@@ -67,14 +58,17 @@ E aí! Sou o **Igor**. No crachá, **Consultor de Implantação na TOTVS SC**; n
   </picture>
 </p>
 
-## 📡 Comunicador
+<img src="assets/h-comunicador.svg" width="100%" alt="Comunicador">
 
-Bug no ponto de entrada, dúvida de AdvPL/TLPP ou só pra trocar ideia: **[igor.seberino@totvs.com.br](mailto:igor.seberino@totvs.com.br)**.
+<p align="center">
+  <a href="mailto:igor.seberino@totvs.com.br"><img src="assets/communicator.svg" width="100%" alt="Comunicador — bug no ponto de entrada, dúvida de AdvPL/TLPP ou só pra trocar ideia: igor.seberino@totvs.com.br"></a>
+</p>
 
 <p align="center">
   <img src="assets/footer.svg" width="100%" alt="Titans, GO! Valeu pela visita">
 </p>
 
 <p align="center">
-  <img src="https://komarev.com/ghpvc/?username=igorSeberino&label=visitas%20na%20Torre&color=E0262B&style=flat-square" alt="Visitas no perfil">
+  <img src="https://raw.githubusercontent.com/igorSeberino/igorSeberino/output/visits.svg" width="380" alt="Visitas na Torre">
+  <img src="https://komarev.com/ghpvc/?username=igorSeberino&style=flat" width="1" height="1" alt="">
 </p>

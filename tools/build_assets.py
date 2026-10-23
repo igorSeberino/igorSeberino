@@ -11,6 +11,7 @@ from __future__ import annotations
 import base64
 import math
 import random
+import re
 from pathlib import Path
 
 import uharfbuzz as hb
@@ -489,6 +490,248 @@ def titan_file() -> str:
                      "AdvPL e TLPP, Engenharia de Software na Católica SC, ex-jogador de LoL", "".join(d))
 
 
+# --------------------------------------------------------------------------- texto rico
+def rich_lines(segs, max_w: float):
+    """segs: [(texto, Font, tamanho, cor)]. Quebra só nos espaços, mantendo o estilo de cada trecho."""
+    words, cur = [], []
+    for text, font, size, color in segs:
+        for tok in re.findall(r"\S+|\s+", text):
+            if tok.isspace():
+                if cur:
+                    words.append(cur)
+                    cur = []
+            else:
+                cur.append((tok, font, size, color))
+    if cur:
+        words.append(cur)
+
+    def wwidth(w):
+        return sum(f.width(t, s) for t, f, s, _ in w)
+
+    lines, line, lw = [], [], 0.0
+    for w in words:
+        space = w[0][1].width(" ", w[0][2]) if line else 0
+        ww = wwidth(w)
+        if line and lw + space + ww > max_w:
+            lines.append(line)
+            line, lw, space = [], 0.0, 0
+        line.append((space, w))
+        lw += space + ww
+    if line:
+        lines.append(line)
+    return lines
+
+
+def rich_paths(lines, x: float, y: float, line_h: float) -> list[str]:
+    out = []
+    for i, line in enumerate(lines):
+        cx = x
+        for space, w in line:
+            cx += space
+            for t, f, s, c in w:
+                out.append(f'<path d="{f.path(t, s, cx, y + i * line_h)}" fill="{c}"/>')
+                cx += f.width(t, s)
+    return out
+
+
+def card_frame(W: int, H: int, extra: str = "") -> list[str]:
+    return [
+        '<defs>' + halftone("htc", 9, 1.6, "#FFFFFF", 0.06) + extra + '</defs>',
+        f'<rect x="2" y="2" width="{W - 4}" height="{H - 4}" rx="18" fill="{INK}" stroke="{LINE}" stroke-width="3"/>',
+        f'<path d="M{W - 280},2 h262 a16,16 0 0 1 16,16 v{min(190, H - 40)} z" fill="url(#htc)"/>',
+        f'<rect x="2" y="2" width="10" height="{H - 4}" rx="5" fill="{RED}"/>',
+        f'<rect x="12" y="2" width="5" height="{H - 4}" fill="{YELLOW}"/>',
+        f'<rect x="17" y="2" width="5" height="{H - 4}" fill="{GREEN}"/>',
+    ]
+
+
+# --------------------------------------------------------------------------- títulos de seção
+def heading(text: str) -> str:
+    W, H = 1200, 72
+    size, tr = 40, 1.5
+    tw = BANGERS.width(text, size, tr)
+    bx, by, bh = 40, 12, 48
+    bw = tw + 56
+    k = math.tan(math.radians(12))
+    end = bx + bw + 24
+    d = [
+        '<g transform="skewX(-12)">',
+        f'<rect x="{num(bx + 6 + by * k)}" y="{by + 6}" width="{num(bw)}" height="{bh}" fill="{BLACK}" opacity=".55"/>',
+        f'<rect x="{num(6 + by * k)}" y="{by}" width="22" height="{bh}" fill="{RED}" stroke="{BLACK}" stroke-width="3"/>',
+        f'<rect x="{num(bx + by * k)}" y="{by}" width="{num(bw)}" height="{bh}" fill="{YELLOW}" stroke="{BLACK}" stroke-width="4"/>',
+        f'<rect x="{num(end + by * k)}" y="31" width="34" height="10" fill="{RED}"/>',
+        f'<rect x="{num(end + 42 + by * k)}" y="31" width="12" height="10" fill="{YELLOW}"/>',
+        f'<rect x="{num(end + 62 + by * k)}" y="31" width="34" height="10" fill="{GREEN}"/>',
+        '</g>',
+        f'<line x1="{num(end + 106)}" y1="36" x2="1194" y2="36" stroke="{MUTED}" stroke-opacity=".45" stroke-width="2"/>',
+        f'<path d="{BANGERS.path(text, size, bx + 28 - 2, by + bh / 2 + BANGERS.cap_height(size) / 2, tracking=tr)}" fill="{BLACK}"/>',
+    ]
+    return svg(W, H, text, "".join(d))
+
+
+# --------------------------------------------------------------------------- quem é esse aí
+def about() -> str:
+    W = 1200
+    R, B = BARLOW_SB, BARLOW_B
+    sz = 27
+    segs = [
+        ("E aí! Sou o ", R, sz, INK), ("Igor", B, sz, INK), (". No crachá, ", R, sz, INK),
+        ("Consultor de Implantação na TOTVS SC", B, sz, INK), ("; no dia a dia, quem escreve as ", R, sz, INK),
+        ("customizações do Protheus", B, sz, RED_DARK), (" em ", R, sz, INK), ("AdvPL", B, sz, RED_DARK),
+        (" e ", R, sz, INK), ("TLPP", B, sz, RED_DARK),
+        (": aquela regra de negócio que o padrão não cobre e o cliente precisa pra ontem.", R, sz, INK),
+    ]
+    x1, x2, y1 = 196, 1192, 10
+    lines = rich_lines(segs, x2 - x1 - 84)
+    lh = 37
+    first = y1 + 56
+    y2 = first + (len(lines) - 1) * lh + 34
+    r = 34
+    ty = (y1 + y2) / 2
+    balloon = (
+        f"M{x1 + r},{y1} H{x2 - r} A{r},{r} 0 0 1 {x2},{y1 + r} V{y2 - r} A{r},{r} 0 0 1 {x2 - r},{y2} "
+        f"H{x1 + r} A{r},{r} 0 0 1 {x1},{y2 - r} V{num(ty + 18)} L{x1 - 44},{num(ty + 4)} L{x1},{num(ty - 16)} "
+        f"V{y1 + r} A{r},{r} 0 0 1 {x1 + r},{y1} Z"
+    )
+    d = [
+        '<defs>' + halftone("htb", 8, 1.5, "#000000", 0.07) + '</defs>',
+        f'<path d="{balloon}" fill="{BLACK}" opacity=".5" transform="translate(6,7)"/>',
+        f'<path d="{balloon}" fill="{WHITE}" stroke="{BLACK}" stroke-width="5" stroke-linejoin="round"/>',
+        f'<path d="M{x2 - 260},{y1 + 3} H{x2 - r} A{r},{r} 0 0 1 {x2 - 3},{y1 + r} V{y1 + 90} Z" fill="url(#htb)"/>',
+        emblem(92, ty, 62, 8),
+    ]
+    d += rich_paths(lines, x1 + 42, first, lh)
+
+    cols = [
+        ("NO TRAMPO", RED, "Customizo o TOTVS Protheus: de ponto de entrada a rotina nova."),
+        ("NA FACULDADE", YELLOW, "Engenharia de Software na Católica SC, com formatura prevista para 2027."),
+        ("FORA DO ERP", GREEN, "Faço web com Python, JavaScript e C# nos projetos da faculdade."),
+    ]
+    cy = y2 + 30
+    gap = 22
+    cw = (W - 8 - gap * 2) / 3
+    ch = 138
+    for i, (title, color, txt) in enumerate(cols):
+        cx = 4 + i * (cw + gap)
+        d += [
+            f'<rect x="{num(cx)}" y="{num(cy)}" width="{num(cw)}" height="{ch}" rx="16" fill="{INK}" stroke="{LINE}" stroke-width="3"/>',
+            f'<path d="M{num(cx)},{num(cy + 16)} a16,16 0 0 1 16,-16 h{num(cw - 32)} a16,16 0 0 1 16,16 v-8 h-{num(cw)} z" fill="{color}"/>',
+            f'<rect x="{num(cx)}" y="{num(cy + 8)}" width="{num(cw)}" height="8" fill="{color}"/>',
+            f'<path d="{BANGERS.path(title, 32, cx + 26, cy + 58, tracking=1.5)}" fill="{color}"/>',
+        ]
+        for j, line in enumerate(BARLOW.wrap(txt, 22, cw - 52)[:3]):
+            d.append(f'<path d="{BARLOW.path(line, 22, cx + 26, cy + 92 + j * 27)}" fill="{GREY}"/>')
+    H = int(cy + ch + 4)
+    return svg(W, H, "Quem é esse aí? E aí! Sou o Igor, Consultor de Implantação na TOTVS SC, que escreve as "
+                     "customizações do Protheus em AdvPL e TLPP.", "".join(d))
+
+
+# --------------------------------------------------------------------------- também no cinto
+def gear() -> str:
+    W = 1200
+    icons = (ROOT / "tools" / "skillicons.svg").read_bytes()
+    m = re.search(rb'viewBox="0 0 ([\d.]+) ([\d.]+)"', icons)
+    iw = 820
+    ih = iw * float(m.group(2)) / float(m.group(1))
+    iy = 92
+    H = int(iy + ih + 76)
+    d = card_frame(W, H)
+    d += [
+        f'<path d="{BANGERS.path("TAMBÉM NO CINTO", 40, 50, 64, tracking=1.5)}" fill="{WHITE}"/>',
+        f'<path d="{BARLOW_SB.path("EQUIPAMENTO SECUNDÁRIO", 17, W - 40, 60, "end", 2)}" fill="{MUTED}"/>',
+        f'<image href="data:image/svg+xml;base64,{base64.b64encode(icons).decode()}" x="{num((W - iw) / 2)}" '
+        f'y="{iy}" width="{iw}" height="{num(ih)}"/>',
+    ]
+    segs = [("…e um pé no ", BARLOW, 23, GREY), ("Progress / OpenEdge ABL", BARLOW_B, 23, YELLOW),
+            (", do curso extracurricular da TOTVS.", BARLOW, 23, GREY)]
+    lines = rich_lines(segs, W - 100)
+    lw = sum(sp + sum(f.width(t, s) for t, f, s, _ in w) for sp, w in lines[0])
+    d += rich_paths(lines, (W - lw) / 2, iy + ih + 46, 28)
+    return svg(W, H, "Também no cinto: Python, C#, JavaScript, React, Node.js, Express, Django, FastAPI, .NET, "
+                     "Tailwind, PostgreSQL, MySQL, Flutter, Godot, Git, GitHub e um pé no Progress / OpenEdge ABL",
+               "".join(d))
+
+
+# --------------------------------------------------------------------------- comunicador
+def communicator() -> str:
+    W, H = 1200, 250
+    d = card_frame(W, H)
+    cx, cy = 168, 125
+    d += [
+        f'<circle cx="{cx + 5}" cy="{cy + 7}" r="88" fill="{BLACK}" opacity=".5"/>',
+        f'<circle cx="{cx}" cy="{cy}" r="88" fill="{YELLOW}" stroke="{BLACK}" stroke-width="6"/>',
+        f'<circle cx="{cx}" cy="{cy}" r="71" fill="#E8B020" stroke="{BLACK}" stroke-width="3"/>',
+        f'<circle cx="{cx}" cy="{cy}" r="56" fill="{BLACK}" stroke="{LINE}" stroke-width="3"/>',
+        f'<path d="{BANGERS.path("T", 74, cx, cy + BANGERS.cap_height(74) / 2, "middle")}" fill="{YELLOW}"/>',
+        f'<circle class="led" cx="{cx + 62}" cy="{cy - 62}" r="10" fill="{RED}" stroke="{BLACK}" stroke-width="3"/>',
+    ]
+    for i, rr in enumerate((26, 44, 62)):
+        d.append(f'<path class="wave w{i}" d="M{cx + 104},{cy - rr} a{rr},{rr} 0 0 1 0,{rr * 2}" fill="none" '
+                 f'stroke="{GREEN}" stroke-width="5" stroke-linecap="round"/>')
+    x0 = 360
+    email = "igor.seberino@totvs.com.br"
+    ew = BARLOW_B.width(email, 52)
+    d += [
+        f'<circle class="led" cx="{x0 + 6}" cy="56" r="6" fill="{GREEN}"/>',
+        f'<path d="{BARLOW_B.path("CANAL ABERTO", 17, x0 + 22, 62, tracking=2.4)}" fill="{GREEN}"/>',
+        f'<path d="{BARLOW_SB.path("Bug no ponto de entrada, dúvida de AdvPL/TLPP ou só pra trocar ideia:", 27, x0, 108)}" fill="{GREY}"/>',
+        f'<path d="{BARLOW_B.path(email, 52, x0, 172)}" fill="{WHITE}"/>',
+        f'<rect x="{x0}" y="184" width="{num(ew)}" height="6" fill="{YELLOW}"/>',
+    ]
+    label = "CHAMAR"
+    lw = BANGERS.width(label, 28, 1.5)
+    bx = x0 + ew + 40
+    bw = lw + 70
+    d += [
+        f'<g transform="translate({num(bx)},0) skewX(-12)">',
+        f'<rect x="{30 + 6}" y="{132 + 6}" width="{num(bw)}" height="50" fill="{BLACK}" opacity=".55"/>',
+        f'<rect x="30" y="132" width="{num(bw)}" height="50" fill="{RED}" stroke="{BLACK}" stroke-width="4"/>',
+        '</g>',
+        f'<path d="{BANGERS.path(label, 28, bx + 22, 168, tracking=1.5)}" fill="{WHITE}"/>',
+        f'<path d="M{num(bx + 34 + lw)},148 l14,9 l-14,9 z" fill="{YELLOW}" stroke="{BLACK}" stroke-width="2" stroke-linejoin="round"/>',
+    ]
+    style = (
+        ".led{animation:blink 1.6s steps(1) infinite}@keyframes blink{50%{opacity:.25}}"
+        ".wave{opacity:0;animation:wave 2.4s ease-out infinite}.w1{animation-delay:.3s}.w2{animation-delay:.6s}"
+        "@keyframes wave{0%{opacity:0}30%{opacity:1}100%{opacity:0}}"
+        "@media (prefers-reduced-motion:reduce){*{animation:none!important}.wave{opacity:1}}"
+    )
+    return svg(W, H, f"Comunicador: {email}", "".join(d), style)
+
+
+# --------------------------------------------------------------------------- visitas
+def visits(n: int) -> str:
+    W, H = 600, 150
+    d = card_frame(W, H)
+    d.append(f'<path d="{BARLOW_B.path("VISITAS NA TORRE", 18, 46, 46, tracking=2.6)}" fill="{YELLOW}"/>')
+    digits = str(max(n, 0)).rjust(6, "0")
+    lead = len(digits) - len(str(max(n, 0)))
+    bw, gap = 54, 8
+    x = 46
+    for i, ch in enumerate(digits):
+        color = MUTED if i < lead else YELLOW
+        d += [
+            f'<rect x="{x}" y="64" width="{bw}" height="66" rx="8" fill="{BLACK}" stroke="{LINE}" stroke-width="2"/>',
+            f'<line x1="{x + 3}" y1="97" x2="{x + bw - 3}" y2="97" stroke="{INK}" stroke-width="2"/>',
+            f'<path d="{BANGERS.path(ch, 48, x + bw / 2, 97 + BANGERS.cap_height(48) / 2, "middle")}" fill="{color}"/>',
+        ]
+        x += bw + gap
+    d.append(f'<rect x="46" y="134" width="{x - gap - 46}" height="4" fill="{RED}"/>')
+    d.append(emblem(W - 82, 88, 40, 6))
+    return svg(W, H, f"Visitas na Torre: {n}", "".join(d))
+
+
+HEADINGS = {
+    "h-quem.svg": "QUEM É ESSE AÍ?",
+    "h-ficha.svg": "FICHA DO TITÃ",
+    "h-cinto.svg": "CINTO DE UTILIDADES",
+    "h-missoes.svg": "MISSÕES",
+    "h-relatorio.svg": "RELATÓRIO DA TORRE",
+    "h-patrulha.svg": "PATRULHA NOTURNA",
+    "h-comunicador.svg": "COMUNICADOR",
+}
+
+
 def main() -> None:
     OUT.mkdir(exist_ok=True)
     files = {
@@ -511,6 +754,10 @@ def main() -> None:
         ),
         "footer.svg": footer(),
         "titan-file.svg": titan_file(),
+        "about.svg": about(),
+        "gear.svg": gear(),
+        "communicator.svg": communicator(),
+        **{name: heading(text) for name, text in HEADINGS.items()},
     }
     for name, content in files.items():
         (OUT / name).write_text(content, encoding="utf-8")
