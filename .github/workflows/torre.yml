@@ -28,9 +28,11 @@ jobs:
       - name: Dependências
         run: pip install -r tools/requirements.txt
 
-      - name: Contador de visitas na Torre
+      - name: Visitas, estatísticas e sequência
         # antes da cobrinha: o snk roda em container e deixa dist/ como root
-        run: python tools/visits.py dist
+        run: python tools/widgets.py dist
+        env:
+          GH_TOKEN: ${{ github.token }}
 
       - name: Gerar a cobrinha nas cores do Robin
         uses: Platane/snk@v3
@@ -45,6 +47,6 @@ jobs:
         with:
           target_branch: output
           build_dir: dist
-          commit_message: "chore: atualiza cobrinha e visitas"
+          commit_message: "chore: atualiza cobrinha, visitas e estatísticas"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

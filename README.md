@@ -7,10 +7,8 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/TOTVS_SC-Consultor_de_Implanta%C3%A7%C3%A3o-E0262B?style=for-the-badge&labelColor=0B0B0F" alt="TOTVS SC — Consultor de Implantação">
-  <img src="https://img.shields.io/badge/stack-AdvPL_%C2%B7_TLPP-FFC93C?style=for-the-badge&labelColor=0B0B0F" alt="AdvPL e TLPP">
-  <img src="https://img.shields.io/badge/base-Joinville_SC-2E9D4A?style=for-the-badge&labelColor=0B0B0F" alt="Joinville - SC">
-  <a href="mailto:igor.seberino@totvs.com.br"><img src="https://img.shields.io/badge/comunicador-igor.seberino%40totvs.com.br-F5F5F0?style=for-the-badge&labelColor=0B0B0F" alt="E-mail: igor.seberino@totvs.com.br"></a>
+  <img src="assets/badges.svg" width="65%" alt="TOTVS SC, Consultor de Implantação · AdvPL e TLPP · Joinville, SC">
+  <a href="mailto:igor.seberino@totvs.com.br"><img src="assets/badge-mail.svg" width="33%" alt="E-mail: igor.seberino@totvs.com.br"></a>
 </p>
 
 <img src="assets/divider.svg" width="100%" alt="">
@@ -44,8 +42,8 @@
 <img src="assets/h-relatorio.svg" width="100%" alt="Relatório da Torre">
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=igorSeberino&show_icons=true&include_all_commits=true&count_private=true&locale=pt-br&bg_color=121218&title_color=FFC93C&icon_color=2E9D4A&text_color=C9CBD3&border_color=E0262B&border_radius=14&custom_title=Relat%C3%B3rio%20da%20Torre" height="155" alt="Estatísticas do GitHub do Igor">
-  <img src="https://streak-stats.demolab.com?user=igorSeberino&locale=pt_BR&background=121218&border=E0262B&stroke=2A2A35&ring=E0262B&fire=FFC93C&currStreakNum=F5F5F0&sideNums=F5F5F0&currStreakLabel=FFC93C&sideLabels=2E9D4A&dates=8B8E99&border_radius=14" height="155" alt="Sequência de contribuições do Igor">
+  <img src="https://raw.githubusercontent.com/igorSeberino/igorSeberino/output/stats.svg" width="49%" alt="Estatísticas do GitHub do Igor: commits, pull requests, issues, estrelas, repositórios e repositórios de terceiros">
+  <img src="https://raw.githubusercontent.com/igorSeberino/igorSeberino/output/streak.svg" width="49%" alt="Sequência de contribuições do Igor: sequência atual, maior sequência e total de contribuições">
 </p>
 
 <img src="assets/h-patrulha.svg" width="100%" alt="Patrulha noturna">
