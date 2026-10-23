@@ -28,6 +28,10 @@ jobs:
       - name: Dependências
         run: pip install -r tools/requirements.txt
 
+      - name: Contador de visitas na Torre
+        # antes da cobrinha: o snk roda em container e deixa dist/ como root
+        run: python tools/visits.py dist
+
       - name: Gerar a cobrinha nas cores do Robin
         uses: Platane/snk@v3
         with:
@@ -35,9 +39,6 @@ jobs:
           outputs: |
             dist/robin-snake-dark.svg?color_snake=#FFC93C&color_dots=#161b22,#4a1216,#8a1a20,#c4202a,#ff4d4d
             dist/robin-snake-light.svg?color_snake=#E0262B&color_dots=#ebedf0,#c6e9cf,#8fd19e,#2e9d4a,#1e6b33
-
-      - name: Contador de visitas na Torre
-        run: python tools/visits.py dist
 
       - name: Publicar na branch output
         uses: crazy-max/ghaction-github-pages@v5
