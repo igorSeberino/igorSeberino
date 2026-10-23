@@ -25,27 +25,9 @@ E aí! Sou o **Igor**. No crachá, **Consultor de Implantação na TOTVS SC**; n
 
 ## 🗂️ Ficha do Titã
 
-<table>
-  <tr>
-    <td width="210" align="center" valign="middle">
-      <img src="https://github.com/igorSeberino.png?size=200" width="180" alt="Avatar do Igor (Robin, Teen Titans)">
-    </td>
-    <td>
-
-| 🗃️ Arquivo | 🔒 Registro confidencial da Torre |
-| :-- | :-- |
-| **Identidade** | Igor Thiago Seberino |
-| **Base** | Joinville · SC 🇧🇷 |
-| **Equipe** | TOTVS SC |
-| **Função** | Consultor de Implantação |
-| **Especialidade** | AdvPL · TLPP |
-| **Treinamento** | Engenharia de Software @ Católica SC (até 2027) |
-| **Idiomas** | Português (nativo) · Inglês (intermediário) |
-| **Antecedentes** | ⚠️ Ex-jogador de LoL. Está em recuperação e prefere não falar sobre isso. |
-
-</td>
-  </tr>
-</table>
+<p align="center">
+  <img src="assets/titan-file.svg" width="100%" alt="Ficha do Titã — Identidade: Igor Thiago Seberino · Base: Joinville, SC · Equipe: TOTVS SC · Função: Consultor de Implantação · Especialidade: AdvPL e TLPP · Treinamento: Engenharia de Software na Católica SC (até 2027) · Idiomas: português (nativo) e inglês (intermediário) · Antecedentes: ex-jogador de LoL, em recuperação">
+</p>
 
 ## 🧰 Cinto de utilidades
 

@@ -8,6 +8,7 @@ resultado não depende de fonte instalada nem de serviço externo.
 """
 from __future__ import annotations
 
+import base64
 import math
 import random
 from pathlib import Path
@@ -386,6 +387,108 @@ def footer() -> str:
     return svg(W, H, "Titans, GO! — valeu pela visita", "".join(d), style)
 
 
+# --------------------------------------------------------------------------- ficha
+def fit(font: Font, text: str, size: float, max_w: float, tracking: float = 0) -> float:
+    while size > 12 and font.width(text, size, tracking) > max_w:
+        size -= 0.5
+    return size
+
+
+def titan_file() -> str:
+    W, H = 1200, 440
+    photo = base64.b64encode((ROOT / "tools" / "avatar.jpg").read_bytes()).decode()
+    d = [
+        '<defs>',
+        halftone("htf", 9, 1.6, "#FFFFFF", 0.06),
+        halftone("htr", 8, 1.6, RED, 0.25),
+        '<clipPath id="ph"><rect x="-120" y="-120" width="240" height="240" rx="10"/></clipPath>',
+        '</defs>',
+        f'<rect x="2" y="2" width="{W - 4}" height="{H - 4}" rx="18" fill="{INK}" stroke="{LINE}" stroke-width="3"/>',
+        f'<path d="M920,2 h262 a16,16 0 0 1 16,16 v190 z" fill="url(#htf)"/>',
+        f'<rect x="2" y="2" width="10" height="{H - 4}" rx="5" fill="{RED}"/>',
+        f'<rect x="12" y="2" width="5" height="{H - 4}" fill="{YELLOW}"/>',
+        f'<rect x="17" y="2" width="5" height="{H - 4}" fill="{GREEN}"/>',
+    ]
+
+    # foto estilo polaroid presa na ficha
+    px, py = 200, 205
+    d += [
+        f'<g transform="translate({px},{py}) rotate(-4)">',
+        f'<rect x="-136" y="-136" width="272" height="318" rx="10" fill="{BLACK}" opacity=".45" transform="translate(7,9)"/>',
+        f'<rect x="-136" y="-136" width="272" height="318" rx="10" fill="{YELLOW}" stroke="{BLACK}" stroke-width="5"/>',
+        f'<rect x="-121" y="-121" width="242" height="242" rx="10" fill="{BLACK}"/>',
+        f'<image href="data:image/jpeg;base64,{photo}" x="-120" y="-120" width="240" height="240" '
+        'clip-path="url(#ph)" preserveAspectRatio="xMidYMid slice"/>',
+        f'<path d="{BANGERS.path("ID CONFIRMADA", 30, 0, 160, "middle", 1.5)}" fill="{BLACK}"/>',
+        '</g>',
+        # fita adesiva
+        f'<rect x="150" y="52" width="104" height="30" fill="{WHITE}" opacity=".55" transform="rotate(-9 202 67)"/>',
+        # emblema no canto da foto
+        f'<g transform="translate(318,96)">{emblem(0, 0, 30, 5)}</g>',
+    ]
+
+    # cabeçalho
+    x0 = 400
+    d += [
+        f'<path d="{BARLOW_B.path("IDENTIDADE", 17, x0, 62, tracking=2.4)}" fill="{YELLOW}"/>',
+        f'<path d="{BANGERS.path("IGOR THIAGO SEBERINO", 58, x0 + 4, 120 + 4, tracking=1.5)}" fill="{RED_DARK}"/>',
+        f'<path d="{BANGERS.path("IGOR THIAGO SEBERINO", 58, x0, 120, tracking=1.5)}" fill="{WHITE}" '
+        f'stroke="{BLACK}" stroke-width="4" stroke-linejoin="round" paint-order="stroke"/>',
+        f'<path d="{BARLOW_SB.path("ARQUIVO T-01 · TORRE TITÃ", 17, W - 40, 62, "end", 1.6)}" fill="{MUTED}"/>',
+    ]
+    # carimbo
+    stamp = "CONFIDENCIAL"
+    sw = BANGERS.width(stamp, 34, 3) + 36
+    d += [
+        f'<g transform="translate(1040,118) rotate(-10)" opacity=".85">',
+        f'<rect x="{num(-sw / 2)}" y="-27" width="{num(sw)}" height="54" rx="6" fill="none" stroke="{RED}" stroke-width="4"/>',
+        f'<rect x="{num(-sw / 2 + 6)}" y="-21" width="{num(sw - 12)}" height="42" rx="3" fill="url(#htr)" stroke="{RED}" stroke-width="1.5"/>',
+        f'<path d="{BANGERS.path(stamp, 34, 0, 13, "middle", 3)}" fill="{RED}"/>',
+        '</g>',
+        f'<line x1="{x0}" y1="146" x2="{W - 40}" y2="146" stroke="{LINE}" stroke-width="2"/>',
+    ]
+
+    # campos 3 x 2
+    fields = [
+        ("BASE", "Joinville · SC", "Brasil"),
+        ("EQUIPE", "TOTVS SC", "em serviço"),
+        ("FUNÇÃO", "Consultor de Implantação", "TOTVS Protheus"),
+        ("ESPECIALIDADE", "AdvPL · TLPP", "desenvolvimento"),
+        ("TREINAMENTO", "Engenharia de Software", "Católica SC · até 2027"),
+        ("IDIOMAS", "Português · Inglês", "nativo · intermediário"),
+    ]
+    colw = (W - 40 - x0) / 3
+    for i, (label, value, sub) in enumerate(fields):
+        cx = x0 + (i % 3) * colw
+        cy = 186 + (i // 3) * 92
+        color = (RED, YELLOW, GREEN)[i % 3]
+        size = fit(BARLOW_SB, value, 27, colw - 34)
+        d += [
+            f'<rect x="{num(cx)}" y="{cy - 16}" width="4" height="70" rx="2" fill="{color}"/>',
+            f'<path d="{BARLOW_B.path(label, 15, cx + 16, cy, tracking=2)}" fill="{color}"/>',
+            f'<path d="{BARLOW_SB.path(value, size, cx + 16, cy + 31)}" fill="{WHITE}"/>',
+            f'<path d="{BARLOW.path(sub, 18, cx + 16, cy + 54)}" fill="{MUTED}"/>',
+        ]
+
+    # antecedentes
+    by = 362
+    d += [
+        f'<rect x="{x0}" y="{by}" width="{W - 40 - x0}" height="50" rx="10" fill="{RED}" fill-opacity=".12" '
+        f'stroke="{RED}" stroke-width="2"/>',
+        f'<g transform="translate({x0 + 30},{by + 25})"><path d="M0,-15 L16,13 L-16,13 Z" fill="{YELLOW}" '
+        f'stroke="{BLACK}" stroke-width="2.5" stroke-linejoin="round"/>'
+        f'<rect x="-1.6" y="-6" width="3.2" height="10" rx="1.4" fill="{BLACK}"/>'
+        f'<circle cy="8" r="1.9" fill="{BLACK}"/></g>',
+        f'<path d="{BARLOW_B.path("ANTECEDENTES", 15, x0 + 60, by + 31, tracking=2)}" fill="{RED}"/>',
+    ]
+    lw = BARLOW_B.width("ANTECEDENTES", 15, 2)
+    txt = "Ex-jogador de LoL. Está em recuperação e prefere não falar sobre isso."
+    d.append(f'<path d="{BARLOW_SB.path(txt, fit(BARLOW_SB, txt, 22, W - 40 - x0 - lw - 100), x0 + 80 + lw, by + 32)}" '
+             f'fill="{WHITE}"/>')
+    return svg(W, H, "Ficha do Titã: Igor Thiago Seberino, Joinville - SC, TOTVS SC, Consultor de Implantação, "
+                     "AdvPL e TLPP, Engenharia de Software na Católica SC, ex-jogador de LoL", "".join(d))
+
+
 def main() -> None:
     OUT.mkdir(exist_ok=True)
     files = {
@@ -407,6 +510,7 @@ def main() -> None:
             ["Python", "FastAPI", "PostgreSQL", "DDD", "Docker"],
         ),
         "footer.svg": footer(),
+        "titan-file.svg": titan_file(),
     }
     for name, content in files.items():
         (OUT / name).write_text(content, encoding="utf-8")

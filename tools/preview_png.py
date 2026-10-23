@@ -9,7 +9,7 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parent.parent / "assets"
 out = Path(sys.argv[1])
 W = 1200
-rows = [["banner.svg"], ["divider.svg"], ["utility-belt.svg"], ["mission-srec.svg", "mission-ludens.svg"],
+rows = [["banner.svg"], ["divider.svg"], ["titan-file.svg"], ["utility-belt.svg"], ["mission-srec.svg", "mission-ludens.svg"],
         ["footer.svg"]]
 
 
