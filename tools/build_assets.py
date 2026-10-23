@@ -126,15 +126,6 @@ def emblem(cx: float, cy: float, r: float, stroke: float) -> str:
     )
 
 
-def birdarang() -> str:
-    return (
-        '<path d="M0,-4 L18,-16 L13,-3 L30,0 L13,3 L18,16 L0,4 L-18,16 L-13,3 L-30,0 '
-        f'L-13,-3 L-18,-16 Z" fill="#DADCE3" stroke="{RED}" stroke-width="2.5" '
-        'stroke-linejoin="round"/>'
-        f'<circle r="4" fill="{RED}"/>'
-    )
-
-
 def halftone(pid: str, step: int, r: float, color: str, opacity: float) -> str:
     return (
         f'<pattern id="{pid}" width="{step}" height="{step}" patternUnits="userSpaceOnUse">'
@@ -245,15 +236,8 @@ def banner() -> str:
         f'<path d="{BARLOW.path("Joinville · Santa Catarina · Brasil", 22, tx, 330, tracking=.6)}" fill="{MUTED}"/>',
     ]
 
-    # birdarang cruzando o céu
+    # faixa tricolor no rodapé
     d += [
-        '<g opacity=".95"><g>',
-        birdarang(),
-        '<animateTransform attributeName="transform" type="rotate" from="0" to="360" dur=".55s" '
-        'repeatCount="indefinite"/></g>',
-        '<animateMotion path="M-60,95 C320,20 760,150 1270,48" dur="11s" begin="1.2s" '
-        'repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;.32;1" calcMode="linear"/></g>',
-        # faixa tricolor no rodapé
         f'<rect y="392" width="400" height="8" fill="{RED}"/>'
         f'<rect x="400" y="392" width="400" height="8" fill="{YELLOW}"/>'
         f'<rect x="800" y="392" width="400" height="8" fill="{GREEN}"/>',

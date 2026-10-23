@@ -19,7 +19,7 @@
 
 E aí! Sou o **Igor**. No crachá, **Consultor de Implantação na TOTVS SC**; no dia a dia, quem escreve as **customizações do Protheus** em **AdvPL** e **TLPP**: aquela regra de negócio que o padrão não cobre e o cliente precisa pra ontem.
 
-- 🏢 Customizo o **TOTVS Protheus**: de ponto de entrada a rotina nova, sem medo de dicionário de dados.
+- 🏢 Customizo o **TOTVS Protheus**: de ponto de entrada a rotina nova.
 - 🎓 Ainda na faculdade: **Engenharia de Software na Católica SC**, com formatura prevista para 2027.
 - 🧪 Fora do ERP, faço web com Python, JavaScript e C# nos projetos da faculdade.
 
@@ -37,7 +37,7 @@ E aí! Sou o **Igor**. No crachá, **Consultor de Implantação na TOTVS SC**; n
 | **Identidade** | Igor Thiago Seberino |
 | **Base** | Joinville · SC 🇧🇷 |
 | **Equipe** | TOTVS SC |
-| **Função** | Consultor de Implantação (leia-se: dev de customizações Protheus) |
+| **Função** | Consultor de Implantação |
 | **Especialidade** | AdvPL · TLPP |
 | **Treinamento** | Engenharia de Software @ Católica SC (até 2027) |
 | **Idiomas** | Português (nativo) · Inglês (intermediário) |
@@ -96,5 +96,3 @@ Bug no ponto de entrada, dúvida de AdvPL/TLPP ou só pra trocar ideia: **[igor.
 <p align="center">
   <img src="https://komarev.com/ghpvc/?username=igorSeberino&label=visitas%20na%20Torre&color=E0262B&style=flat-square" alt="Visitas no perfil">
 </p>
-
-<p align="center"><sub>Robin e Teen Titans são marcas da DC Comics. Isto aqui é só homenagem de fã; as artes do perfil foram desenhadas do zero em SVG (<code>tools/build_assets.py</code>).</sub></p>
