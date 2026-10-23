@@ -32,7 +32,7 @@ E aí! Sou o **Igor**. No crachá, **Consultor de Implantação na TOTVS SC**; n
     </td>
     <td>
 
-| | |
+| 🗃️ Arquivo | 🔒 Registro confidencial da Torre |
 | :-- | :-- |
 | **Identidade** | Igor Thiago Seberino |
 | **Base** | Joinville · SC 🇧🇷 |
@@ -71,8 +71,8 @@ E aí! Sou o **Igor**. No crachá, **Consultor de Implantação na TOTVS SC**; n
 ## 📊 Relatório da Torre
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=igorSeberino&show_icons=true&include_all_commits=true&count_private=true&locale=pt-br&bg_color=121218&title_color=FFC93C&icon_color=2E9D4A&text_color=C9CBD3&border_color=E0262B&border_radius=14&custom_title=Relat%C3%B3rio%20da%20Torre" height="170" alt="Estatísticas do GitHub do Igor">
-  <img src="https://streak-stats.demolab.com?user=igorSeberino&locale=pt_BR&background=121218&border=E0262B&stroke=2A2A35&ring=E0262B&fire=FFC93C&currStreakNum=F5F5F0&sideNums=F5F5F0&currStreakLabel=FFC93C&sideLabels=2E9D4A&dates=8B8E99&border_radius=14" height="170" alt="Sequência de contribuições do Igor">
+  <img src="https://github-readme-stats.vercel.app/api?username=igorSeberino&show_icons=true&include_all_commits=true&count_private=true&locale=pt-br&bg_color=121218&title_color=FFC93C&icon_color=2E9D4A&text_color=C9CBD3&border_color=E0262B&border_radius=14&custom_title=Relat%C3%B3rio%20da%20Torre" height="155" alt="Estatísticas do GitHub do Igor">
+  <img src="https://streak-stats.demolab.com?user=igorSeberino&locale=pt_BR&background=121218&border=E0262B&stroke=2A2A35&ring=E0262B&fire=FFC93C&currStreakNum=F5F5F0&sideNums=F5F5F0&currStreakLabel=FFC93C&sideLabels=2E9D4A&dates=8B8E99&border_radius=14" height="155" alt="Sequência de contribuições do Igor">
 </p>
 
 ## 🐍 Patrulha noturna
